@@ -42,6 +42,13 @@ namespace XpoCriteriaFromLambda
             var Criteria2 = CriteriaOperator.FromLambda<InvoiceDetail>(i => i.Product == product);
             Debug.WriteLine(Criteria2.ToString());
 
+            //Invoices that contains an specific product 
+            var Criteria3 = CriteriaOperator.FromLambda<Invoice>(i => i.InvoiceDetails.Where(id=>id.Product == product)!=null);
+            Debug.WriteLine(Criteria3.ToString());
+
+            //Customers with invoice with a total greater or equal to 1000
+            var Criteria4 = CriteriaOperator.FromLambda<Customer>(c => c.Invoices.Where(i => i.Total >=1000).Count()>0);
+            Debug.WriteLine(Criteria4.ToString());
 
             Assert.Pass();
         }
